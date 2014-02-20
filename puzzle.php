@@ -187,6 +187,7 @@ class Matrix_functions {
      * @return array
      */
     public static function rotate_right($matrix) {
+        // does not work correctly yet
         return call_user_func_array("array_map", array(-1 => null) + $matrix);
     }
 
@@ -194,14 +195,14 @@ class Matrix_functions {
      *  Převrátí částici horizontálně
      */
     public static function flip_horizontal($matrix) {
-        return call_user_func_array("array_reverse", $matrix);     
+        return array_map("array_reverse", $matrix);
     }
     
     /**
      *  Převrátí matici horizontálně 
      */
     public static function flip_vertical($matrix) {
-        return array_map("array_reverse", $matrix);
+        return array_reverse($matrix);
     }
 
 }
@@ -261,19 +262,15 @@ $matrix_arr [] = new Piece(array(0 => array(1, 1), 1 => array(1, 1)));
 $matrix_arr [] = new Piece(array(0 => array(1, 1, 1, 1)));
 
 
-$test_arr = array(0 => array(1, 1, 1), 1 => array(1, 0, 0));
+$test_arr = array(0 => array(1, 2, 3), 1 => array(4, 5, 6), 2 => array(7, 8, 9));
 
+/*echo "Original:<br />";
 print_r($test_arr);
-echo "<br />Right: ";
+echo "<br />Right:<br />";*/
 print_r(Matrix_functions::rotate_right($test_arr));
-echo "<br />Left: ";
-print_r(Matrix_functions::rotate_left($test_arr));
-echo "<br />";
-print_r(Matrix_functions::flip_horizontal($test_arr));
-echo "<br />";
-print_r(Matrix_functions::flip_vertical($test_arr));
-echo "<br />";
 
+
+print_r(array_map("array_reverse", array(1, 2, 3), array(4, 5, 6), array(7, 8, 9)));
 //print_r(array(-1 => null) + array_map('array_reverse', $test_arr));
 //print_r(call_user_func_array('array_map', (array(-1 => null) + array_map('array_reverse', $test_arr))));
 
